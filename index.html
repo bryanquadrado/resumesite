@@ -1,31 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <script language="Javascript" type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
         <script>
         function submitToAPI(e) {
             e.preventDefault();
             var URL = "https://o6s2eu4sa2.execute-api.us-east-1.amazonaws.com/001/contact-us";
+
+            var Namere = /[A-Za-z]{1}[A-Za-z]/;
+            if (!Namere.test($("#name-input").val())) {
+                         alert ("Name can not less than 2 char");
+                return;
+            }
+            var mobilere = /[0-9]{10}/;
+            if (!mobilere.test($("#phone-input").val())) {
+                alert ("Please enter valid mobile number");
+                return;
+            }
+            if ($("#email-input").val()=="") {
+                alert ("Please enter your email id");
+                return;
+            }
+
+            var reeamil = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,6})?$/;
+            if (!reeamil.test($("#email-input").val())) {
+                alert ("Please enter valid email address");
+                return;
+            }
      
-                 var Namere = /[A-Za-z]{1}[A-Za-z]/;
-                 if (!Namere.test($("#name-input").val())) {
-                              alert ("Name can not less than 2 char");
-                     return;
-                 }
-                 var mobilere = /[0-9]{10}/;
-                 if (!mobilere.test($("#phone-input").val())) {
-                     alert ("Please enter valid mobile number");
-                     return;
-                 }
-                 if ($("#email-input").val()=="") {
-                     alert ("Please enter your email id");
-                     return;
-                 }
-     
-                 var reeamil = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,6})?$/;
-                 if (!reeamil.test($("#email-input").val())) {
-                     alert ("Please enter valid email address");
-                     return;
-                 }
      
             var name = $("#name-input").val();
             var phone = $("#phone-input").val();
@@ -362,20 +364,20 @@
                                     <form>
                                         <div class="form-row">
                                             <div class="form-group col-md-6">
-                                                <input type="text" class="form-control" placeholder="Your Name" />
+                                                <input type="text" id="name-input" class="form-control" placeholder="Your Name" />
                                             </div>
                                             <div class="form-group col-md-6">
-                                                <input type="email" class="form-control" placeholder="Your Email" />
+                                                <input type="email" id="email-input" class="form-control" placeholder="Your Email" />
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Subject" />
+                                            <input type="text" id="phone-input" class="form-control" placeholder="Your Number" />
                                         </div>
                                         <div class="form-group">
-                                            <textarea class="form-control" rows="5" placeholder="Message"></textarea>
+                                            <textarea id="description-input" class="form-control" rows="5" placeholder="Message"></textarea>
                                         </div>
                                         <div class="g-recaptcha" data-sitekey="6Lc7cVMUAAAAAM1yxf64wrmO8gvi8A1oQ_ead1ys" class="form-control" style="width:100%;"></div>
-                                        <div><button class="btn" type="button" onclick="SubmitEvent">Send Message</button></div>
+                                        <div><input class="btn" type="submit" onclick="submitToAPI(event)"></input></div>
                                     </form>
                                 </div>
                             </div>
