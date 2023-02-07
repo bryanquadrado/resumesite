@@ -1,6 +1,67 @@
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
+        <script language="Javascript" type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+        <script>
+            function submitToAPI(e) {
+                e.preventDefault();
+                var URL = "https://o6s2eu4sa2.execute-api.us-east-1.amazonaws.com/001/contact-us";
+
+                var Namere = /[A-Za-z]{1}[A-Za-z]/;
+            if (!Namere.test($("#name-input").val())) {
+                         alert ("Name can not less than 2 char");
+                return;
+            }
+            var mobilere = /[0-9]{10}/;
+            if (!mobilere.test($("#phone-input").val())) {
+                alert ("Please enter valid mobile number");
+                return;
+            }
+            if ($("#email-input").val()=="") {
+                alert ("Please enter your email id");
+                return;
+            }
+
+            var reeamil = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,6})?$/;
+            if (!reeamil.test($("#email-input").val())) {
+                alert ("Please enter valid email address");
+                return;
+            }
+        
+
+                var name = $("#name-input").val();
+                var phone = $("#phone-input").val();
+                var email = $("#email-input").val();
+                var desc = $("#description-input").val();
+                var data = {
+                name : name,
+                phone : phone,
+                email : email,
+                desc : desc
+                };
+        
+                $.ajax({
+                type: "POST",
+                url : "https://o6s2eu4sa2.execute-api.us-east-1.amazonaws.com/001/contact-us",
+                dataType: "json",
+                crossDomain: "true",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(data),
+        
+                
+                success: function () {
+                    // clear form and show a success message
+                    alert("Successfull");
+                    document.getElementById("contact-form").reset();
+                location.reload();
+                },
+                error: function () {
+                    // show an error message
+                    alert("UnSuccessfull");
+                }});
+            }
+        </script>
+
         <meta charset="utf-8">
         <title>Currículo Bryan</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -29,7 +90,7 @@
             <div class="sidebar">
                 <div class="sidebar-content">
                     <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-                        <a href="#" class="navbar-brand">Navigation</a>
+                        <a href="#" class="navbar-brand">Navegação</a>
                         <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                             <span class="navbar-toggler-icon"></span>
                         </button>
@@ -51,7 +112,7 @@
                                     <a class="nav-link" href="#contact">Contato<i class="fa fa-envelope"></i></a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/index.html">EN Version<i class="fa fa-train"></i></a>
+                                    <a class="nav-link" href="/index.html">EN Version<i class="fa fa-language"></i></a>
                                 </li>
                             </ul>
                         </div>
@@ -67,7 +128,7 @@
                 <!-- Header Start -->
                 <div class="header" id="header">
                     <div class="content-inner">
-                        <p>Eu sou,</p>
+                        <p>Eu sou</p>
                         <h1>Bryan Quadrado</h1>
                         <h2></h2>
                         <div class="typed-text">Analista DevOps, Analista Cloud, Analista de Infraestrutura</div>
@@ -78,8 +139,8 @@
                 <!-- Large Button Start -->
                 <div class="large-btn">
                     <div class="content-inner">
-                        <a class="btn" href="/resume/Currículo_Bryan_Souza_Quadrado_2023.pdf" target="_blank" rel="noopener noreferrer"><i class="fa fa-download"></i>Resume</a>
-                        <a class="btn" href="https://www.linkedin.com/in/bryan-souza-quadrado/"  target="_blank" rel="noopener noreferrer"><i class="fa fa-hands-helping"></i>Hire Me</a>
+                        <a class="btn" href="/resume/Currículo_Bryan_Souza_Quadrado_2023.pdf" target="_blank" rel="noopener noreferrer"><i class="fa fa-download"></i>Currículo</a>
+                        <a class="btn" href="https://www.linkedin.com/in/bryan-souza-quadrado/"  target="_blank" rel="noopener noreferrer"><i class="fa fa-hands-helping"></i>Contrate-me</a>
                     </div>
                 </div>
                 <!-- Large Button End -->
@@ -88,7 +149,7 @@
                 <div class="about" id="about">
                     <div class="content-inner">
                         <div class="content-header">
-                            <h2>About Me</h2>
+                            <h2>Sobre</h2>
                         </div>
                         <div class="row align-items-center">
                             <div class="col-md-6 col-lg-5">
@@ -96,8 +157,8 @@
                             </div>
                             <div class="col-md-6 col-lg-7">
                                 <p>
-                                    Sou bacharel em engenharia da computação, estou focado em estar no topo da minha carreira, como engenheiro Cloud e engenheiro DevOps venho estudando muito há alguns anos para atingir esse objetivo, e ainda estou trabalhando nisso, sou muito dedicado, e quero poder aplicar meus conhecimentos da melhor forma possível.</p>
-                                <a class="btn" href="https://www.linkedin.com/in/bryan-souza-quadrado/"  target="_blank" rel="noopener noreferrer">Hire Me</a>
+                                    Sou bacharel em engenharia da computação, estou focado em estar no topo da minha carreira, como engenheiro Cloud e engenheiro DevOps, venho estudando muito há alguns anos para atingir esse objetivo, e ainda estou trabalhando nisso, sou muito dedicado, e quero poder aplicar meus conhecimentos da melhor forma possível.</p>
+                                <a class="btn" href="https://www.linkedin.com/in/bryan-souza-quadrado/"  target="_blank" rel="noopener noreferrer">Contrate-me</a>
                             </div>
                         </div>
                         <div class="row">
@@ -166,7 +227,7 @@
                 <div class="education" id="education">
                     <div class="content-inner">
                         <div class="content-header">
-                            <h2>Education</h2>
+                            <h2>Educação</h2>
                         </div>
                         <div class="row align-items-center">
                             <div class="col-md-6">
@@ -193,7 +254,7 @@
                 <div class="experience" id="experience">
                     <div class="content-inner">
                         <div class="content-header">
-                            <h2>Experience</h2>
+                            <h2>Experiência</h2>
                         </div>
                         <div class="row align-items-center">
                             <div class="col-md-6">
@@ -202,7 +263,7 @@
                                     <h3>Messem Investimentos</h3>
                                     <h4>Porto Alegre, POA</h4>
                                     <h5>Analista DevOps</h5>
-                                    <p>Implementação do Manage engine Endpoint Central, gerenciamento de Cloud e Firewall’s Sophos, implantação da ferramenta CI/CD - Azure DevOps, implantação de ambiente de produção, teste e desenvolvimento utilizando AWS (EC2, RDS, S2S VPN, Transit Gateway, WAF, ALB, ACM Certificate, Route 53, Cloud Watch, Cognito etc.) me tornando o responsável pela área, Terraform e análise de dados com OpenSearch.</p>
+                                    <p>Implementação do Manage engine Endpoint Central, gerenciamento de Cloud e Firewall’s Sophos, implantação da ferramenta CI/CD - Azure DevOps, implantação de ambiente de produção, teste e desenvolvimento utilizando AWS (EC2, RDS, S2S VPN, TGW, WAF, ALB, ACM, Route 53, Cloud Watch, Cognito etc.) me tornando o responsável pela área, Terraform e análise de dados com OpenSearch.<br><br><br><br><br><br><br><br><br><br><br><br><br><br></p>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -278,7 +339,7 @@
                 <div class="contact" id="contact">
                     <div class="content-inner">
                         <div class="content-header">
-                            <h2>Contact</h2>
+                            <h2>Contato</h2>
                         </div>
                         <div class="row align-items-center">
                             <div class="col-md-6">
@@ -297,22 +358,23 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form">
-                                    <form>
+                                    <form id="contact-form" method="post" action="">
                                         <div class="form-row">
                                             <div class="form-group col-md-6">
-                                                <input type="text" class="form-control" placeholder="Your Name" />
+                                                <input type="text" id="name-input" class="form-control" placeholder="Seu Nome" />
                                             </div>
                                             <div class="form-group col-md-6">
-                                                <input type="email" class="form-control" placeholder="Your Email" />
+                                                <input type="email" id="email-input" class="form-control" placeholder="Seu Email" />
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Subject" />
+                                            <input type="text" id="phone-input" class="form-control" placeholder="Seu Telefone" />
                                         </div>
                                         <div class="form-group">
-                                            <textarea class="form-control" rows="5" placeholder="Message"></textarea>
+                                            <textarea id="description-input" class="form-control" rows="5" placeholder="Mensagem"></textarea>
                                         </div>
-                                        <div><button class="btn" type="submit">Send Message</button></div>
+                                        <div class="g-recaptcha" data-sitekey="6Lc7cVMUAAAAAM1yxf64wrmO8gvi8A1oQ_ead1ys" class="form-control" style="width:100%;"></div>
+                                        <div class="btn" type="button" onclick="submitToAPI(event)">Enviar Mensagem</div>
                                     </form>
                                 </div>
                             </div>
